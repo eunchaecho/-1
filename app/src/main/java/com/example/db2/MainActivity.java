@@ -1,20 +1,32 @@
 package com.example.db2;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.jar.Attributes;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Entity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.http.HttpResponseCache;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.util.Base64;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
+
+
 
 public class MainActivity extends Activity implements OnClickListener
 {
@@ -76,7 +88,7 @@ public class MainActivity extends Activity implements OnClickListener
       case CROP_FROM_CAMERA:
       {
 
-          final Bundle extras = data.getExtras();
+        final Bundle extras = data.getExtras();
 
         if(extras != null)
         {
@@ -149,9 +161,10 @@ public class MainActivity extends Activity implements OnClickListener
     };
 
     new AlertDialog.Builder(this)
-      .setTitle("업로드할 이미지 선택")
-      .setPositiveButton("사진촬영", cameraListener)
-      .setNeutralButton("앨범선택", albumListener)
-      .setNegativeButton("취소", cancelListener)
-      .show();
-  }}
+            .setTitle("업로드할 이미지 선택")
+            .setPositiveButton("사진촬영", cameraListener)
+            .setNeutralButton("앨범선택", albumListener)
+            .setNegativeButton("취소", cancelListener)
+            .show();
+  }
+
